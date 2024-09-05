@@ -1,0 +1,33 @@
+import Templates from '@/app/(data)/Templates'
+import React from 'react'
+import TemplateCard from './TemplateCard'
+
+export interface Template {
+      name: string,
+      id: number,
+      desc:string,
+      category: string,
+      icon: string,
+      aiPrompt: string,
+      slug: string,
+      form?: FORM[]
+}
+
+export interface FORM {
+      label:string,
+      field: string,
+      name:string,
+      required?: boolean
+}
+
+const TemplateListSection = () => {
+  return (
+    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5'>
+      {Templates.map((item:Template) =>(
+            <TemplateCard {...item}/>
+      ))}
+    </div>
+  )
+}
+
+export default TemplateListSection
