@@ -13,7 +13,7 @@ const DashboardLayout = ({
         <SideNav />
       </div>
 
-      <div className="md:ml-72">
+      <div className="md:ml-72 lg:mr-2">
         <Header/>
             {children}
       </div>
