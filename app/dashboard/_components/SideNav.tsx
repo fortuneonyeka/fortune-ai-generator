@@ -51,7 +51,7 @@ const SideNav = () => {
                         
                         <item.icon className="w-6 h-6"/>
                        
-                        <h2 className="text-lg font-medium">{item.name}</h2>
+                        <h2 className="text-lg font-medium"><a href={item.path}>{item.name}</a></h2>
                   </div>
             ))}
       </div>
