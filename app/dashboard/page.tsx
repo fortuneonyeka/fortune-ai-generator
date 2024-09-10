@@ -14,7 +14,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
+    <div className='px-1'>
       {/* Search section */}
       <SearchSection onSearchInput={handleSearchInput}/>
 
