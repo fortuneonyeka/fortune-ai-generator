@@ -2,7 +2,7 @@ import Templates from '@/app/(data)/Templates'
 import React, { useEffect, useState } from 'react'
 import TemplateCard from './TemplateCard'
 
-export interface Template {
+export interface TEMPLATE {
       name: string,
       id: number,
       desc:string,
@@ -35,7 +35,7 @@ const TemplateListSection = ({userSearchInput}:any) => {
 
   return (
     <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5'>
-      {templateList.map((item:Template) =>(
+      {templateList.map((item:TEMPLATE) =>(
             <TemplateCard {...item}/>
       ))}
     </div>
