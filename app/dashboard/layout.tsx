@@ -8,12 +8,12 @@ const DashboardLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div>
-      <div className="md:w-64 hidden md:block fixed">
+    <div className="bg-slate-100 h-screen">
+      <div className="md:w-72 hidden md:block fixed">
         <SideNav />
       </div>
 
-      <div className="md:ml-72 lg:mr-2">
+      <div className="md:ml-72 lg:mr-">
         <Header/>
             {children}
       </div>
