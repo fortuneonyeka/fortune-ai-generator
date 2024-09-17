@@ -6,8 +6,5 @@ export const AIOutput = pgTable("aioutput", {
      templateSlug:varchar("templateSlug").notNull(),
      createdBy:varchar("email").notNull(),
       createdAt: text("createdAt"),
-      updatedAt: text("updatedAt"),
       aiResponse:text("aiResponse")
-//   name: text('name'),
-//   desc: text('desc'),
 })

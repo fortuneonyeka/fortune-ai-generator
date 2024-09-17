@@ -8,6 +8,10 @@ import Templates from '@/app/(data)/Templates'
 import { ArrowLeft, SkipBack, StepBack } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { chatSession } from '@/utils/AiModel'
+import { db } from '@/utils/db'
+import { AIOutput } from '@/utils/schema'
+import { useUser } from '@clerk/nextjs'
+import moment from 'moment';
 
 
 interface PROPS {
@@ -23,7 +27,9 @@ const CreateNewContent = (props:PROPS) => {
       const[loading, setLoading] = useState(false)
       const[aiOutput, setAiOutput] = useState<string>("")
 
-      const generateAiContent = async(FormData:any) => {
+      const { isLoaded, isSignedIn, user } = useUser()
+
+      const generateAiContent = async(formData:any) => {
         setLoading(true)
         const selectedPrompt = selectedTemplate?.aiPrompt
 
@@ -31,9 +37,28 @@ const CreateNewContent = (props:PROPS) => {
 
         const result = await chatSession.sendMessage(finalAIPrompt);
 
-        console.log(result.response.text());
+        // console.log(result.response.text());
         setAiOutput(result.response.text())
+        await saveDataInDB(formData, selectedTemplate.slug, result.response.text())
         setLoading(false)
+        
+      }
+
+      const saveDataInDB = async(formData:any, slug:any, aiResp:string) => {
+        if (!isLoaded || !isSignedIn || !user) {
+          console.error('User is not loaded or signed in')
+          return
+        }
+    
+        const result = await db.insert(AIOutput).values({
+          formData: formData,
+          templateSlug: slug,
+          aiResponse: aiResp,
+          createdBy: user.emailAddresses[0]?.emailAddress || "unknown",
+          createdAt: moment().format("DD/MM/YY"),
+          // updatedAt: moment().format("DD/MM/YY")
+        })
+        console.log(result);
         
       }
       
