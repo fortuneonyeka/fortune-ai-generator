@@ -119,7 +119,7 @@ const HistoryPage = () => {
                   </Button>
     
                   <Button
-                    className="flex gap-2"
+                    className="flex gap-2 hover:bg-red-700"
                     onClick={() => deleteItem(item.id)}
                     variant="destructive"
                   >
