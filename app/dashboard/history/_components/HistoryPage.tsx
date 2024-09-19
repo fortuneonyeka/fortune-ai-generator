@@ -80,50 +80,60 @@ const HistoryPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4">
       <Toaster />
       <h1 className="text-2xl font-bold mb-4">Search History</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {historyItems.map((item) => (
-          <div key={item.id} className="bg-white rounded-lg shadow-md p-4">
-            <h2 className="font-semibold text-lg mb-2">Prompt:</h2>
-            <p className="mb-4">{item.formData}</p>
-            <h2 className="font-semibold text-lg mb-2">Result:</h2>
-            <p className="mb-4">{item.aiResponse || "No response available"}</p>
-            <div className="flex flex-col justify-between items-center lg:flex-row">
-              <span className="text-sm text-gray-500">
-                <p>
-                  Created on :
-                  {item.createdAt ? item.createdAt : "Date not available"}
+        {historyItems.map((item) => {
+          // Remove braces and quotes from formData using split() and join()
+          const cleanedFormData = item.formData.split(/[{}"]/).join('');
+          
+          return (
+            <div key={item.id} className="bg-white rounded-lg shadow-md p-4">
+              
+              {/* Bold the first 6 letters and display the rest */}
+              <div className="mb-4">
+                <p className="capitalize">
+                  <strong>{cleanedFormData.slice(0, 6)}</strong>
+                  {cleanedFormData.slice(6)}
                 </p>
-                <p>Created by: {item.createdBy}</p>
-              </span>
-              <div className="flex gap-4 py-4">
-                <Button
-                  className="flex gap-2 "
-                  onClick={() =>
-                    item.aiResponse && copyToClipboard(item.aiResponse)
-                  }
-                  disabled={!item.aiResponse}
-                >
-                  <Copy size={16} className="sm:block md:hidden lg:block"/>
-                  <span className="hidden md:block">Copy</span>
-                </Button>
-
-                <Button
-                  className="flex gap-2 "
-                  onClick={() => deleteItem(item.id)}
-                  variant="destructive"
-                >
-                  <Trash2 size={16} className="sm:block md:hidden lg:block"/>
-                  <span className="hidden md:block">Delete</span>
-                </Button>
+              </div>
+    
+              <h2 className="font-semibold text-lg mb-2">Result:</h2>
+              <p className="mb-4">{item.aiResponse || "No response available"}</p>
+    
+              <div className="flex flex-col justify-between items-center lg:flex-row">
+                <span className="text-sm text-gray-500">
+                  <p>Created on : {item.createdAt ? item.createdAt : "Date not available"}</p>
+                  <p>Created by: {item.createdBy}</p>
+                </span>
+    
+                <div className="flex gap-4 py-4">
+                  <Button
+                    className="flex gap-2"
+                    onClick={() => item.aiResponse && copyToClipboard(item.aiResponse)}
+                    disabled={!item.aiResponse}
+                  >
+                    <Copy size={16} className="sm:block md:hidden lg:block" />
+                    <span className="hidden md:block">Copy</span>
+                  </Button>
+    
+                  <Button
+                    className="flex gap-2"
+                    onClick={() => deleteItem(item.id)}
+                    variant="destructive"
+                  >
+                    <Trash2 size={16} className="sm:block md:hidden lg:block" />
+                    <span className="hidden md:block">Delete</span>
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
+    
   );
 };
 
