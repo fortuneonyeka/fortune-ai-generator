@@ -76,7 +76,8 @@ const HistoryPage = () => {
             {historyItems.map((item) => {
               const cleanedFormData = item.formData.split(/[{}"]/).join(''); // Clean up formData
               const responseWords = item.aiResponse?.split(" ") || [];
-              const truncatedResponse = responseWords.slice(0, 20).join(" "); // Get first 20 words
+              const truncatedResponse = responseWords.slice(0, 30).join(" "); // Get first 20 words
+              const responsCount = responseWords.length
     
               return (
                 <div key={item.id} className="bg-white rounded-lg shadow-md p-4">
@@ -94,7 +95,7 @@ const HistoryPage = () => {
                         ? item.aiResponse // Show full response if toggled
                         : `${truncatedResponse}...`} {/* Show truncated response */}
                     </p>
-                    {responseWords.length > 30 && (
+                    {responseWords.length > 20 && (
                       <button
                         className="text-blue-500 underline"
                         onClick={() => toggleResponse(item.id)}
@@ -108,6 +109,7 @@ const HistoryPage = () => {
                     <span className="text-sm text-gray-500">
                       <p>Created on : {item.createdAt ? item.createdAt : "Date not available"}</p>
                       <p>Created by: {item.createdBy}</p>
+                      <p>Words Count: {responsCount}</p>
                     </span>
     
                     <div className="flex lg:flex-col gap-2 py-4">
