@@ -37,7 +37,7 @@ const OutPutSection = ({ aiOutput }: PROPS) => {
         height="600px"
         initialEditType="wysiwyg" // Corrected typo
         useCommandShortcut={true}
-        onChange={() => console.log(editorRef.current?.getInstance().getMarkdown())}
+        // onChange={() => console.log(editorRef.current?.getInstance().getMarkdown())}
       />
     </div>
   );
