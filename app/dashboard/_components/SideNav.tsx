@@ -11,6 +11,7 @@ import {
   WalletCards,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
+import UsageTrack from "./UsageTrack";
 
 const SideNav = () => {
   const path = usePathname();
@@ -47,7 +48,7 @@ const SideNav = () => {
   ];
 
   return (
-    <div className="h-screen p-5  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-white">
+    <div className="h-screen p-5  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-white relative">
       <div className="flex border-b pb-2">
         <Image
           src={"/logo.svg"}
@@ -72,6 +73,10 @@ const SideNav = () => {
             <h2 className="text-lg font-medium">{item.name}</h2>
           </Link>
         ))}
+      </div>
+
+      <div className="absolute bottom-10 left-0 w-full">
+        <UsageTrack />
       </div>
     </div>
   );
