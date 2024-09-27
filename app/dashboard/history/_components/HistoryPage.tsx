@@ -8,7 +8,7 @@ import { lt, eq } from "drizzle-orm";
 import toast, { Toaster } from "react-hot-toast";
 
 // Update this interface to match your AIOutput table structure
-interface HistoryItem {
+export interface HistoryItem {
   id: number;
   formData: string;
   templateSlug: string;
@@ -75,7 +75,7 @@ const HistoryPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {historyItems.map((item) => {
               const cleanedFormData = item.formData.split(/[{}"]/).join(''); // Clean up formData
-              const responseWords = item.aiResponse?.split(" ") || [];
+              const responseWords = item.aiResponse?.trim().split(/\s+/).filter(word => word !== "") || [];
               const truncatedResponse = responseWords.slice(0, 30).join(" "); // Get first 20 words
               const responsCount = responseWords.length
     
