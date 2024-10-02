@@ -82,7 +82,7 @@ const HistoryPage = () => {
               return (
                 <div key={item.id} className="bg-white rounded-lg shadow-md p-4">
                   <div className="mb-4">
-                    <p>
+                    <p className="break-words">
                       <strong>{cleanedFormData.slice(0, 6)}</strong>
                       {cleanedFormData.slice(6)}
                     </p>
