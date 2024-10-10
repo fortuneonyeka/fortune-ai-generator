@@ -13,6 +13,7 @@ import { AIOutput } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
 import moment from 'moment';
 import { TotalUsageContext } from '@/app/context/TotalUsageContext'
+import { useRouter } from 'next/navigation'
 
 
 
@@ -30,13 +31,13 @@ const CreateNewContent = (props:PROPS) => {
       const[aiOutput, setAiOutput] = useState<string>("")
 
       const { isLoaded, isSignedIn, user } = useUser()
-
+      const router = useRouter()
       const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
 
 
       const generateAiContent = async(formData:any) => {
         if (totalUsage>=10000) {
-          console.log("Please Upgrade")
+          router.push("/dashboard/billing")
           
           return;
         }
