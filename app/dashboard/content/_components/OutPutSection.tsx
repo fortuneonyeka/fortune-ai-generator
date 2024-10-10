@@ -13,18 +13,20 @@ const OutPutSection = ({ aiOutput }: PROPS) => {
   const editorRef = useRef<any>(null);
 
   const handleCopy = async () => {
-    const editorInstance = editorRef.current?.getInstance();
+    navigator.clipboard.writeText(aiOutput)
+    toast.success("Copied to clipboard!", { duration: 2000, position: "bottom-right" });
+    // const editorInstance = editorRef.current?.getInstance();
 
-    if (editorInstance) {
-      const markdownContent = editorInstance.getMarkdown(); // Get current content as markdown
+    // if (editorInstance) {
+    //   const markdownContent = editorInstance.getMarkdown(); // Get current content as markdown
 
-      try {
-        await navigator.clipboard.writeText(markdownContent); // Copy content to clipboard
-        toast.success("Copied to clipboard!", { duration: 2000, position: "bottom-right" });
-      } catch (error) {
-        console.error("Failed to copy text:", error);
-      }
-    }
+    //   try {
+    //     await navigator.clipboard.writeText(markdownContent); // Copy content to clipboard
+    //     toast.success("Copied to clipboard!", { duration: 2000, position: "bottom-right" });
+    //   } catch (error) {
+    //     console.error("Failed to copy text:", error);
+    //   }
+    // }
   };
 
 
