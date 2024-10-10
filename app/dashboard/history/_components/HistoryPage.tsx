@@ -114,7 +114,7 @@ const HistoryPage = () => {
     
                     <div className="flex lg:flex-col gap-2 py-4">
                       <Button
-                        className="flex gap-2"
+                        className="flex gap-2 bg-green-600 text-black hover:bg-blue-500 hover:text-white"
                         onClick={() => item.aiResponse && copyToClipboard(item.aiResponse)}
                         disabled={!item.aiResponse}
                       >
@@ -123,9 +123,8 @@ const HistoryPage = () => {
                       </Button>
     
                       <Button
-                        className="flex gap-2 hover:bg-red-700"
+                        className="flex gap-2 hover:bg-red-700 hover:text-white bg-red-400"
                         onClick={() => deleteItem(item.id)}
-                        variant="destructive"
                       >
                         <Trash2 size={16} className="sm:block md:hidden lg:block" />
                         <span className="hidden md:block">Delete</span>

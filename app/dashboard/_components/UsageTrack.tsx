@@ -5,14 +5,14 @@ import { AIOutput } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
 import { eq } from 'drizzle-orm'
 import { ArrowBigUp } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { HistoryItem } from '../history/_components/HistoryPage'
+import { TotalUsageContext } from '@/app/context/TotalUsageContext'
 
 const UsageTrack = () => {
 
       const { user } = useUser()
-      const [totalWords, setTotalWords] = useState<number>(0)
-
+      const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
       useEffect(() => {
         user && GetData()
       }, [user])
@@ -40,7 +40,7 @@ const UsageTrack = () => {
                   }
                 });
 
-                setTotalWords(total);
+                setTotalUsage(total);
               }
       
   return (
@@ -50,12 +50,12 @@ const UsageTrack = () => {
             {/* progress bar */}
             <div className='h-2 bg-[#9981f9] w-full rounded-full '>
                   <div className='h-2 rounded-full bg-white'
-                  style={{width:(totalWords/10000)*100+"%"}}
+                  style={{ width: (totalUsage / 10000) * 100 + '%' }}
                   >
 
                   </div>
             </div>
-            <h2 className='text-sm text-gray-400'>{totalWords}/10,000 Credits Used</h2>
+            <h2 className='text-sm text-gray-400'>{totalUsage}/10,000 Credits Used</h2>
       </div>
       <Button className='w-full py-5 gap-3 text-primary font-medium' variant={'outline'}>Upgrade <ArrowBigUp/></Button>
     </div>
