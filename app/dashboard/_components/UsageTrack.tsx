@@ -8,11 +8,14 @@ import { ArrowBigUp } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { HistoryItem } from '../history/_components/HistoryPage'
 import { TotalUsageContext } from '@/app/context/TotalUsageContext'
+import { useRouter } from 'next/navigation'
 
 const UsageTrack = () => {
 
       const { user } = useUser()
       const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
+      const router = useRouter()
+      
       useEffect(() => {
         user && GetData()
       }, [user])
@@ -57,7 +60,7 @@ const UsageTrack = () => {
             </div>
             <h2 className='text-sm text-gray-400'>{totalUsage}/10,000 Credits Used</h2>
       </div>
-      <Button className='w-full py-5 gap-3 text-primary font-medium' variant={'outline'}>Upgrade <ArrowBigUp/></Button>
+      <Button onClick={() =>router.push("/dashboard/billing")} className='w-full py-5 gap-3 text-primary font-medium' variant={'outline'}>Upgrade <ArrowBigUp/></Button>
     </div>
   )
 }
