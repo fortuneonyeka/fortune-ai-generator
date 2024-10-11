@@ -1,7 +1,7 @@
 import { SearchIcon } from "lucide-react";
 import React from "react";
 
-const SearchSection = ({onSearchInput}:any) => {
+const SearchSection = ({ onSearchInput }: any) => {
   return (
     <div
       className="p-10 bg-gradient-to-br from-blue-500 via-blue-700 to bg-purple-600
@@ -18,7 +18,7 @@ const SearchSection = ({onSearchInput}:any) => {
           <input
             type="text"
             placeholder="Search"
-            onChange={(e) =>onSearchInput(e.target.value)}
+            onChange={(e) => onSearchInput(e.target.value)}
             className="outline-none bg-black text-white rounded-md p-2 w-full"
           />
         </div>
